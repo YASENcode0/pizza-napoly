@@ -1,0 +1,15 @@
+.box1 {
+  background-color: rgb(161, 161, 255);
+  width: 100%;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.box1 img{
+  width: 150px;
+  height: 150px;
+  background-color: red;
+
+}
