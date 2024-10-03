@@ -1,0 +1,34 @@
+.radio {
+  width: 90%;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+.radio-choose {
+  background-color: beige;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  border: solid 3px;
+  padding: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.radio-true-choose span,
+.radio-false-choose span {
+  border-radius: 100%;
+  width: 90% !important;
+  height: 90% !important;
+  transition: all ease-in-out .3s;
+}
+.radio-true-choose span {
+  background-color: #29ae11;
+}
+
+.radio-false-choose span {
+  background-color: #ae1111;
+}
