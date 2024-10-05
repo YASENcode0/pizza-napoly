@@ -10,10 +10,21 @@ export default function Nav() {
   const [menu, setMenu] = useState(false);
   const navigate = useNavigate();
   return (
-    <div className="nav-box">
-      <img src={logo} alt="logo" onClick={()=>{navigate('/')}}/>
-      <div className="buttons">
-        <div className="cart" onClick={()=>{navigate('/cart')}}>
+    <div className={`nav-box `}>
+      <img
+        src={logo}
+        alt="logo"
+        onClick={() => {
+          navigate("/");
+        }}
+      />
+      {/* <div className="buttons">
+        <div
+          className="cart"
+          onClick={() => {
+            navigate("/cart");
+          }}
+        >
           <FaCartShopping />
           <span>5</span>
         </div>
@@ -25,7 +36,7 @@ export default function Nav() {
           />
           <Menu on={menu} />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

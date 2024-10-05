@@ -1,0 +1,32 @@
+.nav-stack {
+  /* background-color: #fff; */
+  width: 90%;
+  height: 40px;
+  position: fixed;
+  bottom: 0;
+  margin: 5%;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 7px 7px 5px #0606063f;
+  border: solid 2px #fff;
+  backdrop-filter: blur(20px);
+  z-index: 9;
+
+  justify-content: space-around;
+  align-items: center;
+}
+.nav-btn {
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+  transition: all ease-in-out 0.3s;
+}
+.nav-btn * {
+  height: 30px;
+  width: 30px;
+}
+.selected {
+  color: red;
+}

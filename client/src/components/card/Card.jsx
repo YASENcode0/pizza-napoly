@@ -23,8 +23,11 @@ export default function Card({ data }) {
       <div className="card-img">
         <img src={data?.img || pizza} alt="pizza img" />
       </div>
-      <h2>{data?.name}</h2>
-      <h3>{data?.price}</h3>
+      <div className="card-title">
+        <h2>{data?.name}</h2>
+        <p>{"Lorem ipsum dolor sit amet"}</p>
+        <h3>{data?.price} ₪</h3>
+      </div>
       <button onClick={handlePopup}>
         {lang === "en" ? "order" : UseTranslate("order")}
       </button>

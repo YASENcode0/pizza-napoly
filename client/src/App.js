@@ -9,11 +9,14 @@ import Cart from "./components/cart/Cart";
 import Login from "./components/LogIn/Login";
 import Sign from "./components/LogIn/Sign";
 import { language, OrderDetails } from "./components/context/OrderDetails";
+import Footer from "./components/Footer/Footer";
+import NavStack from "./components/NavStack/NavStack";
 
 function App() {
   const [onOf, setOnOF] = useState(false);
   const [order, setOrder] = useState({});
   const [lang, setLang] = useState("en");
+  const [page, setPage] = useState("home");
 
   function handlePopup() {
     setOnOF(!onOf);
@@ -28,7 +31,7 @@ function App() {
       <OrderDetails.Provider value={{ order, setOrder }}>
         <Order.Provider value={{ handlePopup }}>
           <Router>
-            <div className={`App ${onOf && "App-scroll-of"}`} dir="">
+            <div className={`App ${onOf && "App-scroll-of"} `} dir="">
               <Nav />
               <Routes>
                 <Route path="/" element={<Home />} />
@@ -37,6 +40,8 @@ function App() {
                 <Route path="/sing" element={<Sign />} />
               </Routes>
               <PopUp onOf={onOf} setOnOf={setOnOF} />
+              <NavStack />
+              <Footer />
             </div>
           </Router>
         </Order.Provider>
