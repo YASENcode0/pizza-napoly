@@ -1,0 +1,22 @@
+.location {
+  /* background-color: #ffcfcf; */
+  width: 100%;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  bottom: 0;
+  position: relative;
+}
+.map {
+  /* background-color: green; */
+  width: 100%;
+  height: 100%;
+}
+.slide-location {
+  background-color: #fd9d9d;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50%;
+}

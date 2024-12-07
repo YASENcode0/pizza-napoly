@@ -17,10 +17,95 @@
   width: 100%;
   height: 100vh;
   /* overflow: hidden; */
+  transition: all ease-in-out 0.2s;
+  background-color: #fff;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+}
+.open-side-menu {
+  position: fixed;
+  scale: 0.7;
+  overflow: hidden;
+  border-radius: 30px;
+  box-shadow: 0px 0px 40px 5px #00000035;
+  right: -150px;
+  z-index: 9;
 }
 .App * {
   font-family: ARclassic !important;
 }
 .App-scroll-of {
   overflow: hidden !important;
+}
+.side-menu {
+  /* background-color: ; */
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  z-index: -1;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+.menu-title {
+  /* background-color: gray; */
+  width: 100%;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.menu-my-info {
+  /* background-color: blanchedalmond; */
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+}
+.menu-my-info img {
+  width: 70px;
+  height: 70px;
+  border-radius: 15px;
+  box-shadow: 0px 5px 10px 0px #00000042;
+}
+.menu-my-mane * {
+  margin: 0;
+}
+.menu-title button {
+  background: none;
+  border: none;
+  width: 45px;
+  height: 45px;
+  color: #fff;
+  border: solid 1px;
+  border-radius: 15px;
+}
+.menu-buttons {
+  /* background-color: aliceblue; */
+  width: 50%;
+  left: 0;
+  height: 50%;
+  display: flex;
+  align-items: center;
+}
+.menu-buttons ul {
+  color: #fff;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  font-size: x-large;
+  font-weight: 500;
+}
+.menu-buttons ul li {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  transition: all ease-in-out 0.2s;
+}
+.menu-buttons ul li:active {
+  color: black;
 }

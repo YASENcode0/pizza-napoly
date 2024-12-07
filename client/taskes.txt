@@ -1,0 +1,6 @@
+
+to do
+
+1 - fix localstorage bugs 
+2 - build profile page
+3 - build ui ux login sign up page

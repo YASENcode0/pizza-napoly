@@ -3,6 +3,7 @@ import "./Card.css";
 import { UseTranslate, words } from "../PublicStore";
 import { Order } from "../context/PopUps";
 import pizza from "../../assets/photos/pizza-type1.png";
+import { TbShoppingBagPlus } from "react-icons/tb";
 
 export default function Card({ data }) {
   const [lang, setLang] = useState("en");
@@ -24,13 +25,15 @@ export default function Card({ data }) {
         <img src={data?.img || pizza} alt="pizza img" />
       </div>
       <div className="card-title">
-        <h2>{data?.name}</h2>
-        <p>{"Lorem ipsum dolor sit amet"}</p>
-        <h3>{data?.price} ₪</h3>
+        <h3>{data?.name}</h3>
+        <p>Lorem ipsum dolor sit amet sit amet </p>
       </div>
-      <button onClick={handlePopup}>
-        {lang === "en" ? "order" : UseTranslate("order")}
-      </button>
+      <div className="card-buttons">
+        <h1>{data?.price} ₪</h1>
+        <button onClick={handlePopup}>
+          <TbShoppingBagPlus />
+        </button>
+      </div>
     </div>
   );
 }

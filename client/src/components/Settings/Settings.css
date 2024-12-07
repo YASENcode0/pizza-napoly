@@ -1,0 +1,30 @@
+.settings {
+  width: 100%;
+  flex-grow: 1;
+}
+.settings-box1 {
+  height: 70%;
+  background-color: #ffa2a2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 50px;
+}
+.settings-box1 img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: solid 3px #fff;
+}
+.settings-inputs{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.phone-input,
+.location-input {
+  background-color: red;
+  width: 200px;
+  display: flex;
+}

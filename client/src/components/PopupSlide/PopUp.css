@@ -54,7 +54,14 @@
   padding: 5px;
   outline-color: #ff3d00;
 }
-
+.pop-total {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pop-total h2{
+  color: green;
+}
 .order-btns {
   width: 80%;
   display: flex;
