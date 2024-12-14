@@ -32,6 +32,23 @@ export default function Settings() {
   //     .then((result) => console.log(result))
   //     .catch((error) => console.error(error));
 
+  console.log(navigator.geolocation.getCurrentPosition(abc));
+  function abc(a) {
+    console.log(a);
+  }
+
+  const lat = 32.0852999; // استبدلها بإحداثيات الطول
+  const lng = 34.7817676; // استبدلها بإحداثيات العرض
+
+  fetch(
+    `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${"AIzaSyCAJHj5jc1qOEDttWbl8UPu0Ixx63MXKKA"}`
+  )
+    .then((response) => response.json())
+    .then((data) => {
+     console.log(data)
+    })
+    .catch((error) => console.error("خطأ:", error));
+
   return (
     <div className="settings">
       <div className="settings-box1">
@@ -41,7 +58,7 @@ export default function Settings() {
         />
         <div className="settings-inputs">
           <div className="phone-input">
-            <input type="number" name="phone" value={0} />
+            <input type="number" name="phone" value={123456} />
           </div>
           <div className="location-input">
             <input type="text" name="location" value={""} />

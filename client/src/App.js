@@ -24,6 +24,7 @@ import { IoIosSettings } from "react-icons/io";
 import Payment from "./components/Payment/Payment";
 import MyOrders from "./components/MyOrders/MyOrders";
 import Settings from "./components/Settings/Settings";
+import PhoneVerify from './components/PhoneVerify/PhoneVerify'
 
 // import Inter from "./components/InterFaace/inter";
 
@@ -144,6 +145,7 @@ function App() {
                   <Route path="/payment" element={<Payment />} />
                   <Route path="/my-orders" element={<MyOrders />} />
                   <Route path="/settings" element={<Settings />} />
+                  <Route path="/Check/phoneNumber" element={<PhoneVerify />} />
                 </Routes>
                 <PopUp
                   onOf={onOf}
