@@ -1,3 +1,8 @@
 {
-  "cSpell.words": ["btns", "Sambosa"]
+  "cSpell.words": [
+    "btns",
+    "Sambosa"
+  ],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "notebook.defaultFormatter": "esbenp.prettier-vscode"
 }
