@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import "./Payment.css";
 import { RiCoupon3Fill } from "react-icons/ri";
 import { RiMastercardFill } from "react-icons/ri";
@@ -6,7 +6,7 @@ import chip from "../../assets/photos/chip.png";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
 import { CiCirclePlus } from "react-icons/ci";
-
+import { MessageContext } from "../context/MessageContext";
 // fix the slide switch problem
 
 export default function Payment() {
@@ -23,6 +23,9 @@ export default function Payment() {
   const [cardSelected, setCardSelected] = useState(0);
   const [coupon, setCoupon] = useState("");
   const cardRef = useRef();
+
+  ///contexts
+  const { addMessage } = useContext(MessageContext);
 
   function scrollTo(i) {
     // window.scrollTo(1, 250);
@@ -61,10 +64,16 @@ export default function Payment() {
       return index - 1;
     });
   }
-  async function chichCoupon() {
+  async function checkCoupon() {
     // await axios.post().then((r)=>{
     //   console.log(r)
     // })
+    console.log('first')
+    if(coupon){
+      addMessage('Coupon Code Added',true)
+    }else{
+      addMessage('Add Coupon Code',1)
+    }
   }
 
   return (
@@ -109,7 +118,7 @@ export default function Payment() {
               setCoupon(e.target.value);
             }}
           />
-          <button>
+          <button onClick={checkCoupon}>
             <RiCoupon3Fill />
           </button>
         </div>

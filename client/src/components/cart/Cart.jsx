@@ -8,21 +8,50 @@ import pizzaImg from "../../assets/photos/pizza-type1.png";
 import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
-  const [myOrders, setMyOrders] = useState([{}]);
+  const [on, setOn] = useState(true);
+  const [selectAll, setSelectAll] = useState(false);
+  const [selected, setSelected] = useState([]);
+  const [myOrders, setMyOrders] = useState([]);
   const navigate = useNavigate();
+
   useEffect(() => {
     GetOrders().then((ret) => {
       setMyOrders(ret);
     });
   }, []);
 
+  // switch the on of to enable the radio in items
+  function selectSwitch() {
+    setOn(!on);
+  }
+
+  function addSelectItem(item) {
+    setSelected((pre) => {
+      if (pre.some((pizza) => pizza === item)) {
+        return pre.filter((i) => {
+          return i != item;
+        });
+      } else {
+        return [...selected, item];
+      }
+    });
+  }
+
   const userOrders = myOrders?.map((item, i) => {
-    console.log(item);
-    return <ItemLabel key={i} item={item} />;
+    return <ItemLabel key={i} is={selectAll}  item={item} on={on} addItemFun={addSelectItem} />;
   });
+
   return (
     <div className="cart-box">
       <h2>Your Cart</h2>
+      <div>
+        <button onClick={selectSwitch}>select</button>
+        <label>select all</label>
+        <input type="radio" checked={selectAll} onClick={()=>{setSelectAll(!selectAll)
+        console.log(selectAll)
+          setSelected(!selectAll ? myOrders : [])
+        }}/>
+      </div>
       <div className="cart-orders">{userOrders}</div>
       <div className="cart-button">
         <div className="cart-bottom">
@@ -69,7 +98,14 @@ async function chickOutOrder(_id) {
 }
 
 //order component
-function ItemLabel({ item }) {
+function ItemLabel({ item, on, addItemFun, key , is}) {
+  const [chick, setChick] = useState(false);
+
+  function changeChick() {
+    setChick(!chick);
+    addItemFun(item);
+  }
+
   return (
     <div
       className="item-label"
@@ -84,6 +120,7 @@ function ItemLabel({ item }) {
       <div className="label-price">
         <h2>12.0</h2>
       </div>
+      {on && <input type="radio" onClick={changeChick} checked={is || chick} />}
     </div>
   );
 }

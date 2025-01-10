@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Message.css";
 import { IoMdClose } from "react-icons/io";
 
-export default function Message({ content , type }) {
+export default function Message({ content, type }) {
   const [on, setOn] = useState(true);
   const [close, setClose] = useState(true);
   useEffect(() => {
@@ -20,7 +20,15 @@ export default function Message({ content , type }) {
 
   if (close) {
     return (
-      <div className={`message-unit ${!on && "hide-message"} ${type ? "message-note" : 'message-warning'}`}>
+      <div
+        className={`message-unit ${!on && "hide-message"} ${
+          type
+            ? type === 1
+              ? "message-fix"
+              : "message-note"
+            : "message-warning"
+        }`}
+      >
         <button
           onClick={() => {
             setOn(false);

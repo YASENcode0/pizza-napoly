@@ -1,5 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+import { createRoot } from "react-dom/client";
+import { APIProvider, Map } from "@vis.gl/react-google-maps";
 import "./Settings.css";
+import Maps from "./Map";
+import { LuPencil } from "react-icons/lu";
+import { dividerClasses } from "@mui/material";
+import { IoIosArrowBack } from "react-icons/io";
+import { MdDarkMode } from "react-icons/md";
+import { FaPencilAlt } from "react-icons/fa";
 
 export default function Settings() {
   //   const myHeaders = new Headers();
@@ -32,47 +40,92 @@ export default function Settings() {
   //     .then((result) => console.log(result))
   //     .catch((error) => console.error(error));
 
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [location, setLocation] = useState("ber sheva");
+  const [language, setLanguage] = useState("EN");
+
   console.log(navigator.geolocation.getCurrentPosition(abc));
   function abc(a) {
     console.log(a);
   }
 
-  const lat = 32.0852999; // استبدلها بإحداثيات الطول
-  const lng = 34.7817676; // استبدلها بإحداثيات العرض
-
-  fetch(
-    `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${"AIzaSyCAJHj5jc1qOEDttWbl8UPu0Ixx63MXKKA"}`
-  )
-    .then((response) => response.json())
-    .then((data) => {
-     console.log(data)
-    })
-    .catch((error) => console.error("خطأ:", error));
-
   return (
+    // <div className="settings">
+    //   <div className="settings-box1">
+    //     <img
+    //       src="https://randomuser.me/api/portraits/men/21.jpg"
+    //       alt="profile"
+    //     />
+    //     <div className="settings-inputs">
+    //       <div className="phone-input">
+    //         <input type="number" name="phone" value={123456} disabled />
+    //         <LuPencil />
+    //       </div>
+    //       <div className="location-input">
+    //         <input type="text" name="location" value={location} disabled />
+    //         <LuPencil />
+    //       </div>
+    //     </div>
+    //   </div>
+    //   <div className="settings-box2">
+    //     <select
+    //       name="language"
+    //       onChange={(e) => {
+    //         setLanguage(e.target.value);
+    //       }}
+    //       value={language}
+    //     >
+    //       <option value="AR">arabic</option>
+    //       <option value="EN">english</option>
+    //       <option value="HR">hebrew</option>
+    //     </select>
+    //     <div>light</div>
+    //     <Maps/>
+    //   </div>
+    // </div>
     <div className="settings">
-      <div className="settings-box1">
+      <div className="settings-stack">
+        <button>
+          <IoIosArrowBack />
+        </button>
+        <h2>Settings</h2>
+        <button>
+          <MdDarkMode />
+        </button>
+      </div>
+      <div className="settings-my-photo">
         <img
-          src="https://randomuser.me/api/portraits/men/21.jpg"
-          alt="profile"
+          src={"https://randomuser.me/api/portraits/men/21.jpg"}
+          alt="profilePhoto"
         />
-        <div className="settings-inputs">
-          <div className="phone-input">
-            <input type="number" name="phone" value={123456} />
-          </div>
-          <div className="location-input">
-            <input type="text" name="location" value={""} />
-          </div>
+        <button>
+          <FaPencilAlt />
+        </button>
+      </div>
+      <div className="settings-inputs">
+        <div className="settings-input">
+          <label>Name</label>
+          <input type="text" placeholder="Yasin" />
+        </div>
+        <div className="settings-input">
+          <label>Email</label>
+          <input type="text" placeholder="Yasin" />
+        </div>
+        <div className="settings-input">
+          <label>Password</label>
+          <input type="text" placeholder="Yasin" />
+        </div>
+
+        <div className="settings-input">
+          <label>Phone</label>
+          <input type="text" placeholder="Yasin" />
+        </div>
+        <div className="settings-input">
+          <label>Location</label>
+          <input type="text" placeholder="Yasin" />
         </div>
       </div>
-      <div className="settings-box2">
-        <select name="language">
-          <option value="AR">arabic</option>
-          <option value="EN">english</option>
-          <option value="HR">hebrew</option>
-        </select>
-        <div>light</div>
-      </div>
+      <button className="settings-log-out">sign out</button>
     </div>
   );
 }

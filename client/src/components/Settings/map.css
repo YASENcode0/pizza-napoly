@@ -1,0 +1,22 @@
+.map-box {
+  background-color: blue;
+  width: calc(100% - 10px);
+  height: 500px;
+  position: relative;
+  border: solid 5px #fff;
+}
+.map-select-btn {
+  all: unset;
+  background-color: #fff;
+  position: absolute;
+  z-index: 10;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  transition: all 0.1s ease-in-out;
+}
+.map-select-btn:active {
+  background-color: red !important;
+}
