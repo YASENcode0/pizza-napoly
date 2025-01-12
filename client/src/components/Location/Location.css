@@ -1,22 +1,25 @@
 .location {
-  /* background-color: #ffcfcf; */
-  width: 100%;
-  height: max-content;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  bottom: 0;
-  position: relative;
+   background-color: #ffcfcf;
+   width: 100%;
+   height: max-content;
+   display: flex;
+   flex-direction: column;
+   flex-grow: 1;
+   bottom: 0;
+   position: relative;
+   align-items: center;
 }
-.map {
-  /* background-color: green; */
-  width: 100%;
-  height: 100%;
+.location-map {
+   /* background-color: red; */
+   width: 100%;
+   height: 100%;
+   position: relative;
 }
-.slide-location {
-  background-color: #fd9d9d;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 50%;
+.location-map-controls {
+   background-color: #fff;
+   width: 90%;
+   height: 100px;
+   position: absolute;
+   bottom: 0px;
+   border-top: solid 1px;
 }

@@ -4,7 +4,7 @@ import { APIProvider, Map } from "@vis.gl/react-google-maps";
 import "./Settings.css";
 import Maps from "./Map";
 import { LuPencil } from "react-icons/lu";
-import { dividerClasses } from "@mui/material";
+// import { dividerClasses } from "@mui/material";
 import { IoIosArrowBack } from "react-icons/io";
 import { MdDarkMode } from "react-icons/md";
 import { FaPencilAlt } from "react-icons/fa";
