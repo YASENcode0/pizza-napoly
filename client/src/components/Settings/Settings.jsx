@@ -8,6 +8,7 @@ import { dividerClasses } from "@mui/material";
 import { IoIosArrowBack } from "react-icons/io";
 import { MdDarkMode } from "react-icons/md";
 import { FaPencilAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 export default function Settings() {
   //   const myHeaders = new Headers();
@@ -43,6 +44,8 @@ export default function Settings() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [location, setLocation] = useState("ber sheva");
   const [language, setLanguage] = useState("EN");
+
+  const navigate = useNavigate();
 
   console.log(navigator.geolocation.getCurrentPosition(abc));
   function abc(a) {
@@ -85,7 +88,11 @@ export default function Settings() {
     // </div>
     <div className="settings">
       <div className="settings-stack">
-        <button>
+        <button
+          onClick={() => {
+            navigate("/");
+          }}
+        >
           <IoIosArrowBack />
         </button>
         <h2>Settings</h2>
@@ -105,7 +112,12 @@ export default function Settings() {
       <div className="settings-inputs">
         <div className="settings-input">
           <label>Name</label>
-          <input type="text" placeholder="Yasin" />
+          <div className="settings-input-edt">
+            <input type="text" placeholder="Yasin" />
+            <button>
+              <FaPencilAlt />
+            </button>
+          </div>
         </div>
         <div className="settings-input">
           <label>Email</label>
@@ -118,11 +130,21 @@ export default function Settings() {
 
         <div className="settings-input">
           <label>Phone</label>
-          <input type="text" placeholder="Yasin" />
+          <div className="settings-input-edt">
+            <input type="text" placeholder="Yasin" />
+            <button>
+              <FaPencilAlt />
+            </button>
+          </div>
         </div>
         <div className="settings-input">
           <label>Location</label>
+          <div className="settings-input-edt">
           <input type="text" placeholder="Yasin" />
+          <button>
+              <FaPencilAlt />
+            </button>
+          </div>
         </div>
       </div>
       <button className="settings-log-out">sign out</button>

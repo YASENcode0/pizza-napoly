@@ -8,7 +8,7 @@ import pizzaImg from "../../assets/photos/pizza-type1.png";
 import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
-  const [on, setOn] = useState(true);
+  const [on, setOn] = useState(false);
   const [selectAll, setSelectAll] = useState(false);
   const [selected, setSelected] = useState([]);
   const [myOrders, setMyOrders] = useState([]);
