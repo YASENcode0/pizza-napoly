@@ -1,35 +1,65 @@
 .profile {
-   background-color: #ffcccc;
-   width: 100%;
-   flex-grow: 1;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   position: relative;
-   overflow: hidden;
-   gap: 50px;
+  background-color: #fff;
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  gap: 50px;
 }
 .profile-stack {
-   background-color: red;
-   width: 100%;
-   display: flex;
-   justify-content: space-around;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+.profile-stack button {
+  all: unset;
+  font-size: x-large;
 }
 .profile-user {
-   /* background-color: red; */
-   display: flex;
-   align-items: center;
-   width: 90%;
-   gap: 50px;
+  /* background-color: #fff; */
+  display: flex;
+  align-items: center;
+  width: 90%;
+  gap: 50px;
+  padding: 10px;
 }
 .profile-user img {
-   width: 120px;
-   height: 120px;
-   border-radius: 50%;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
 }
 .profile-user-details {
-   background-color: green;
-   display: flex;
-   flex-direction: column;
+  /* background-color: green; */
+  height: 100px;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.profile-user-details * {
+  margin: 0;
+  padding: 0;
 }
 
+.profile-mnu {
+  width: 90%;
+  height: fit-content;
+}
+.profile-mnu-btn {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.profile-mnu-btn-title {
+  display: flex;
+  gap: 10px;
+}
