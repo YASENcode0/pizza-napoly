@@ -171,8 +171,8 @@ function App() {
                   {/* <NavStack /> */}
                   {/* <Footer /> */}
                   <div className="message-box">
-                    {messages?.map((message) => (
-                      <Message content={message.content} type={message.type} />
+                    {messages?.map((message,i) => (
+                      <Message key={i} content={message.content} type={message.type} />
                     ))}
                   </div>
                 </div>

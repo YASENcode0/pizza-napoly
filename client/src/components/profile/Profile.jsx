@@ -1,11 +1,11 @@
 import React from "react";
 import "./Profile.css";
-import { GetUserDetails, UseTranslate } from "../PublicStore";
+import { GetUserData, UseTranslate } from "../PublicStore";
 import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
   //var
-  const userData = GetUserDetails();
+  const userData = GetUserData();
   console.log(userData);
   const navigate = useNavigate();
 

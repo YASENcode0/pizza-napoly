@@ -27,12 +27,13 @@ export function UseTranslate(word) {
   );
 }
 
-export function GetUserDetails() {
-  return {
-    name: "yasen",
-    phone: 8974278,
-    cart: [{ name: "large pizza", price: 60 }],
-  };
+export async function GetUserData() {
+  try {
+    const res = await axios.get("user/data/:123456");
+    return res;
+  } catch (err) {
+    return err.message;
+  }
 }
 
 export async function GetOrders() {
@@ -42,7 +43,6 @@ export async function GetOrders() {
       { name: "large pizza", price: 60 },
       { name: "large pizza", price: 60 },
       { name: "large pizza", price: 60 },
-      
     ];
   } catch (err) {
     console.log(err);

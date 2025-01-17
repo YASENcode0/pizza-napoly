@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Cart.css";
-import { GetOrders, GetUserDetails } from "../PublicStore";
+import { GetOrders, GetUserData } from "../PublicStore";
 import { MyOrdersList } from "../context/MyOrdersList";
 import { CgExtensionAdd } from "react-icons/cg";
 import axios from "axios";
@@ -38,7 +38,15 @@ export default function Cart() {
   }
 
   const userOrders = myOrders?.map((item, i) => {
-    return <ItemLabel key={i} is={selectAll}  item={item} on={on} addItemFun={addSelectItem} />;
+    return (
+      <ItemLabel
+        key={i}
+        is={selectAll}
+        item={item}
+        on={on}
+        addItemFun={addSelectItem}
+      />
+    );
   });
 
   return (
@@ -47,10 +55,15 @@ export default function Cart() {
       <div>
         <button onClick={selectSwitch}>select</button>
         <label>select all</label>
-        <input type="radio" checked={selectAll} onClick={()=>{setSelectAll(!selectAll)
-        console.log(selectAll)
-          setSelected(!selectAll ? myOrders : [])
-        }}/>
+        <input
+          type="radio"
+          checked={selectAll}
+          onClick={() => {
+            setSelectAll(!selectAll);
+            console.log(selectAll);
+            setSelected(!selectAll ? myOrders : []);
+          }}
+        />
       </div>
       <div className="cart-orders">{userOrders}</div>
       <div className="cart-button">
@@ -98,7 +111,7 @@ async function chickOutOrder(_id) {
 }
 
 //order component
-function ItemLabel({ item, on, addItemFun, key , is}) {
+function ItemLabel({ item, on, addItemFun, key, is }) {
   const [chick, setChick] = useState(false);
 
   function changeChick() {

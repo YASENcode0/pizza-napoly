@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { APIProvider, Map } from "@vis.gl/react-google-maps";
 import "./Settings.css";
@@ -9,6 +9,8 @@ import { IoIosArrowBack } from "react-icons/io";
 import { MdDarkMode } from "react-icons/md";
 import { FaPencilAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { GetUserData } from "../PublicStore";
+import { MessageContext } from "../context/MessageContext";
 
 export default function Settings() {
   //   const myHeaders = new Headers();
@@ -41,15 +43,36 @@ export default function Settings() {
   //     .then((result) => console.log(result))
   //     .catch((error) => console.error(error));
 
+  const { addMessage } = useContext(MessageContext);
+
   const [phoneNumber, setPhoneNumber] = useState("");
   const [location, setLocation] = useState("ber sheva");
   const [language, setLanguage] = useState("EN");
+  const [userData, setUserDate] = useState("");
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
+  async function getUserData() {
+    try {
+      const data = await GetUserData();
+      console.log(data);
+      if (data.status > 299 && data.status < 499) {
+        addMessage(`err get user ${data?.status}`, 1);
+      } else {
+        setUserDate(data.data);
+      }
+    } catch (err) {
+      addMessage(err.message, 1);
+    }
+  }
 
   const navigate = useNavigate();
 
-  console.log(navigator.geolocation.getCurrentPosition(abc));
+  // console.log(navigator.geolocation.getCurrentPosition(abc));
   function abc(a) {
-    console.log(a);
+    // console.log(a);
   }
 
   return (
@@ -113,7 +136,7 @@ export default function Settings() {
         <div className="settings-input">
           <label>Name</label>
           <div className="settings-input-edt">
-            <input type="text" placeholder="Yasin" />
+            <input type="text" placeholder={userData?.name} />
             <button>
               <FaPencilAlt />
             </button>
@@ -121,17 +144,16 @@ export default function Settings() {
         </div>
         <div className="settings-input">
           <label>Email</label>
-          <input type="text" placeholder="Yasin" />
+          <input type="text" placeholder={userData?.Email} />
         </div>
         <div className="settings-input">
           <label>Password</label>
-          <input type="text" placeholder="Yasin" />
+          <input type="text" placeholder={userData?.password} />
         </div>
-
         <div className="settings-input">
           <label>Phone</label>
           <div className="settings-input-edt">
-            <input type="text" placeholder="Yasin" />
+            <input type="text" placeholder={userData?.phone} />
             <button>
               <FaPencilAlt />
             </button>
@@ -140,8 +162,8 @@ export default function Settings() {
         <div className="settings-input">
           <label>Location</label>
           <div className="settings-input-edt">
-          <input type="text" placeholder="Yasin" />
-          <button>
+            <input type="text" placeholder={userData?.location} />
+            <button>
               <FaPencilAlt />
             </button>
           </div>
