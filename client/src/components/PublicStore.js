@@ -50,13 +50,14 @@ export async function GetOrders() {
 }
 
 export async function AddOrder(order) {
-  try {
-    await axios.post("").then((res) => {
-      console.log(res);
-    });
-  } catch (err) {
-    console.log("err add order");
-  }
+  // try {
+  //   await axios.post("").then((res) => {
+  //     console.log(res);
+  //   });
+  // } catch (err) {
+  //   console.log("err add order");
+  //   return {status: false};
+  // }
   console.log(order);
   return { msg: "order added", status: true };
 }

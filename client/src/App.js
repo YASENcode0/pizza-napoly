@@ -29,6 +29,7 @@ import Message from "./components/Message/Message";
 //contexts
 import { MessageContext } from "./components/context/MessageContext";
 import ConfPop from "./components/ConfPop/ConfPop";
+import Favorites from "./components/Favorites/Favorites";
 // import Inter from "./components/InterFaace/inter";
 
 export const lang = "ar";
@@ -73,17 +74,23 @@ function App() {
   function ChangeLanguage(value) {
     setLang(value);
   }
-  function addOrder(currOrder) {
-    console.log(currOrder);
-    setMyOrders([...myOrders, currOrder]);
-    HandleUserOrders(currOrder);
+  // function addOrder(currOrder) {
+  //   console.log(currOrder);
+  //   setMyOrders([...myOrders, currOrder]);
+  //   HandleUserOrders(currOrder);
+  // }
+
+  function addOrder(order) {
+    setMyOrders([...myOrders, order]);
   }
 
   return (
     <MessageContext.Provider value={{ addMessage }}>
       <MyOrdersList.Provider value={{ currPizza, setCurrPizza }}>
         <language.Provider value={{ lang, ChangeLanguage }}>
-          <OrderDetails.Provider value={{ order, setOrder, addOrder }}>
+          <OrderDetails.Provider
+            value={{ order, setOrder, addOrder, allOrders: myOrders }}
+          >
             <Order.Provider value={{ handlePopup }}>
               <Router>
                 <div className="side-menu">
@@ -113,7 +120,12 @@ function App() {
                         <HiShoppingCart />
                         Shop
                       </li>
-                      <li>
+                      <li
+                        onClick={() => {
+                          handleMenuPop();
+                          window.location = "/Favorites";
+                        }}
+                      >
                         <FaHeart />
                         Favorites
                       </li>
@@ -139,7 +151,7 @@ function App() {
                   }`}
                   dir=""
                 >
-                  <Nav handleMenuPop={handleMenuPop} />
+                  <Nav handleMenuPop={handleMenuPop} myOrders={myOrders} />
                   <Routes>
                     <Route
                       path="/"
@@ -157,6 +169,7 @@ function App() {
                     <Route path="/payment" element={<Payment />} />
                     <Route path="/my-orders" element={<MyOrders />} />
                     <Route path="/settings" element={<Settings />} />
+                    <Route path="/Favorites" element={<Favorites />} />
                     <Route
                       path="/Check/phoneNumber"
                       element={<PhoneVerify />}
@@ -171,8 +184,12 @@ function App() {
                   {/* <NavStack /> */}
                   {/* <Footer /> */}
                   <div className="message-box">
-                    {messages?.map((message,i) => (
-                      <Message key={i} content={message.content} type={message.type} />
+                    {messages?.map((message, i) => (
+                      <Message
+                        key={i}
+                        content={message.content}
+                        type={message.type}
+                      />
                     ))}
                   </div>
                 </div>
