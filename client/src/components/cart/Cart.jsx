@@ -14,19 +14,15 @@ export default function Cart() {
   const [selectAll, setSelectAll] = useState(false);
   const [selected, setSelected] = useState([]);
   const [myOrders, setMyOrders] = useState([]);
-  const [total,setTotal] = useState(0)
+  const [total, setTotal] = useState(0);
 
   const navigate = useNavigate();
 
   const { allOrders } = useContext(OrderDetails);
-  console.log(allOrders)
+  console.log(allOrders);
 
   useEffect(() => {
-
-    setTotal(()=>{
-      /// sun function to count the total
-      return 5
-    })
+    setTotal(() => allOrders.reduce((total, card) => total + card?.price, 0));
 
     GetOrders().then((ret) => {
       setMyOrders(ret);
@@ -146,7 +142,7 @@ function ItemLabel({ index, item, on, addItemFun, key, is }) {
         <img src={pizzaImg} alt="pizza" />
       </div>
       <p className="label-title">{item?.type}</p>
-      <p className="label-title">{item?.note || ''}</p>
+      <p className="label-title">{item?.note || ""}</p>
       <div className="label-price">
         <h2>{item?.price} ₪</h2>
       </div>
