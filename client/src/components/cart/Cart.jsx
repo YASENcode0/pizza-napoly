@@ -64,7 +64,7 @@ export default function Cart() {
   return (
     <div className="cart-box">
       <h2>Your Cart</h2>
-      <div>
+      {/* <div>
         <button onClick={selectSwitch}>select</button>
         <label>select all</label>
         <input
@@ -76,7 +76,7 @@ export default function Cart() {
             setSelected(!selectAll ? myOrders : []);
           }}
         />
-      </div>
+      </div> */}
       <div className="cart-orders">{userOrders}</div>
       <div className="cart-button">
         <div className="cart-bottom">

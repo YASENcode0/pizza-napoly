@@ -1,5 +1,5 @@
 .profile {
-   background-color: #ffcccc;
+   /* background-color: #ffcccc;
    width: 100%;
    flex-grow: 1;
    display: flex;
@@ -7,7 +7,16 @@
    align-items: center;
    position: relative;
    overflow: hidden;
-   gap: 50px;
+   gap: 50px; */
+    background-color: #fff;
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  gap: 50px;
 }
 .profile-stack {
    background-color: red;
@@ -31,17 +40,6 @@
    background-color: green;
    display: flex;
    flex-direction: column;
-}
-
-  background-color: #fff;
-  width: 100%;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-  gap: 50px;
 }
 .profile-stack {
   width: 100%;
