@@ -27,12 +27,13 @@ export function UseTranslate(word) {
   );
 }
 
-export function GetUserDetails() {
-  return {
-    name: "yasen",
-    phone: 8974278,
-    cart: [{ name: "large pizza", price: 60 }],
-  };
+export async function GetUserData() {
+  try {
+    const res = await axios.get("user/data/:123456");
+    return res;
+  } catch (err) {
+    return err.message;
+  }
 }
 
 export async function GetOrders() {
@@ -42,7 +43,6 @@ export async function GetOrders() {
       { name: "large pizza", price: 60 },
       { name: "large pizza", price: 60 },
       { name: "large pizza", price: 60 },
-      
     ];
   } catch (err) {
     console.log(err);
@@ -50,13 +50,14 @@ export async function GetOrders() {
 }
 
 export async function AddOrder(order) {
-  try {
-    await axios.post("").then((res) => {
-      console.log(res);
-    });
-  } catch (err) {
-    console.log("err add order");
-  }
+  // try {
+  //   await axios.post("").then((res) => {
+  //     console.log(res);
+  //   });
+  // } catch (err) {
+  //   console.log("err add order");
+  //   return {status: false};
+  // }
   console.log(order);
   return { msg: "order added", status: true };
 }

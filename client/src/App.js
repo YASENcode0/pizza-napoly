@@ -30,6 +30,7 @@ import Location from "./components/Location/Location";
 //contexts
 import { MessageContext } from "./components/context/MessageContext";
 import ConfPop from "./components/ConfPop/ConfPop";
+import Favorites from "./components/Favorites/Favorites";
 // import Inter from "./components/InterFaace/inter";
 
 export const lang = "ar";
@@ -63,125 +64,137 @@ function App() {
 
    useEffect(() => {}, []);
 
-   // handleTxt()
-   function handlePopup() {
-      setOnOF(!onOf);
-   }
-   function handleMenuPop() {
-      setMenuPop(!menuPop);
-      console.log(menuPop);
-   }
-   function ChangeLanguage(value) {
-      setLang(value);
-   }
-   function addOrder(currOrder) {
-      console.log(currOrder);
-      setMyOrders([...myOrders, currOrder]);
-      HandleUserOrders(currOrder);
-   }
+  // handleTxt()
+  function handlePopup() {
+    setOnOF(!onOf);
+  }
+  function handleMenuPop() {
+    setMenuPop(!menuPop);
+    console.log(menuPop);
+  }
+  function ChangeLanguage(value) {
+    setLang(value);
+  }
+  // function addOrder(currOrder) {
+  //   console.log(currOrder);
+  //   setMyOrders([...myOrders, currOrder]);
+  //   HandleUserOrders(currOrder);
+  // }
 
-   return (
-      <MessageContext.Provider value={{ addMessage }}>
-         <MyOrdersList.Provider value={{ currPizza, setCurrPizza }}>
-            <language.Provider value={{ lang, ChangeLanguage }}>
-               <OrderDetails.Provider value={{ order, setOrder, addOrder }}>
-                  <Order.Provider value={{ handlePopup }}>
-                     <Router>
-                        <div className="side-menu">
-                           <div className="menu-title">
-                              <div className="menu-my-info">
-                                 <img
-                                    src="https://randomuser.me/api/portraits/men/21.jpg"
-                                    alt="my-photo"
-                                 />
-                                 <div className="menu-my-mane">
-                                    <h3>Miguel Peck</h3>
-                                    <p>i love pizza</p>
-                                 </div>
-                              </div>
-                              <button onClick={handleMenuPop}>
-                                 <IoIosArrowBack />
-                              </button>
-                           </div>
-                           <div className="menu-buttons">
-                              <ul>
-                                 <li
-                                    onClick={() => {
-                                       handleMenuPop();
-                                       window.location = "/";
-                                    }}
-                                 >
-                                    <HiShoppingCart />
-                                    Shop
-                                 </li>
-                                 <li>
-                                    <FaHeart />
-                                    Favorites
-                                 </li>
-                                 <li>
-                                    <FaBagShopping />
-                                    Cart
-                                 </li>
-                                 <li
-                                    onClick={() => {
-                                       handleMenuPop();
-                                       window.location = "/settings";
-                                    }}
-                                 >
-                                    <IoIosSettings />
-                                    Settings
-                                 </li>
-                              </ul>
-                           </div>
-                        </div>
-                        <div
-                           className={`App ${onOf && "App-scroll-of"} ${
-                              menuPop && "open-side-menu"
-                           }`}
-                           dir=""
-                        >
-                           <Nav handleMenuPop={handleMenuPop} />
-                           <Routes>
-                              <Route
-                                 path="/"
-                                 element={
-                                    <Home
-                                       currPizza={currPizza}
-                                       setCurrPizza={setCurrPizza}
-                                    />
-                                 }
-                              />
-                              <Route path="/cart" element={<Cart />} />
-                              <Route path="/profile" element={<Profile />} />
-                              <Route path="/login" element={<Login />} />
-                              <Route path="/signup" element={<Sign />} />
-                              <Route path="/payment" element={<Payment />} />
-                              <Route path="/my-orders" element={<MyOrders />} />
-                              <Route path="/settings" element={<Settings />} />
-                              <Route path="/location" element={<Location />} />
-                              <Route
-                                 path="/Check/phoneNumber"
-                                 element={<PhoneVerify />}
-                              />
-                           </Routes>
-                           <PopUp
-                              onOf={onOf}
-                              setOnOf={setOnOF}
-                              currPizza={currPizza}
-                              setCurrPizza={setCurrPizza}
-                           />
-                           {/* <NavStack /> */}
-                           {/* <Footer /> */}
-                           <div className="message-box">
-                              {messages?.map((message) => (
-                                 <Message
-                                    content={message.content}
-                                    type={message.type}
-                                 />
-                              ))}
-                           </div>
-                        </div>
-                        {/* <ConfPop
+  function addOrder(order) {
+    setMyOrders([...myOrders, order]);
+  }
+
+  return (
+    <MessageContext.Provider value={{ addMessage }}>
+      <MyOrdersList.Provider value={{ currPizza, setCurrPizza }}>
+        <language.Provider value={{ lang, ChangeLanguage }}>
+          <OrderDetails.Provider
+            value={{ order, setOrder, addOrder, allOrders: myOrders }}
+          >
+            <Order.Provider value={{ handlePopup }}>
+              <Router>
+                <div className="side-menu">
+                  <div className="menu-title">
+                    <div className="menu-my-info">
+                      <img
+                        src="https://randomuser.me/api/portraits/men/21.jpg"
+                        alt="my-photo"
+                      />
+                      <div className="menu-my-mane">
+                        <h3>Miguel Peck</h3>
+                        <p>i love pizza</p>
+                      </div>
+                    </div>
+                    <button onClick={handleMenuPop}>
+                      <IoIosArrowBack />
+                    </button>
+                  </div>
+                  <div className="menu-buttons">
+                    <ul>
+                      <li
+                        onClick={() => {
+                          handleMenuPop();
+                          window.location = "/";
+                        }}
+                      >
+                        <HiShoppingCart />
+                        Shop
+                      </li>
+                      <li
+                        onClick={() => {
+                          handleMenuPop();
+                          window.location = "/Favorites";
+                        }}
+                      >
+                        <FaHeart />
+                        Favorites
+                      </li>
+                      <li>
+                        <FaBagShopping />
+                        Cart
+                      </li>
+                      <li
+                        onClick={() => {
+                          handleMenuPop();
+                          window.location = "/settings";
+                        }}
+                      >
+                        <IoIosSettings />
+                        Settings
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div
+                  className={`App ${onOf && "App-scroll-of"} ${
+                    menuPop && "open-side-menu"
+                  }`}
+                  dir=""
+                >
+                  <Nav handleMenuPop={handleMenuPop} myOrders={myOrders} />
+                  <Routes>
+                    <Route
+                      path="/"
+                      element={
+                        <Home
+                          currPizza={currPizza}
+                          setCurrPizza={setCurrPizza}
+                        />
+                      }
+                    />
+                    <Route path="/cart" element={<Cart />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<Sign />} />
+                    <Route path="/payment" element={<Payment />} />
+                    <Route path="/my-orders" element={<MyOrders />} />
+                    <Route path="/settings" element={<Settings />} />
+                    <Route path="/Favorites" element={<Favorites />} />
+                    <Route
+                      path="/Check/phoneNumber"
+                      element={<PhoneVerify />}
+                    />
+                  </Routes>
+                  <PopUp
+                    onOf={onOf}
+                    setOnOf={setOnOF}
+                    currPizza={currPizza}
+                    setCurrPizza={setCurrPizza}
+                  />
+                  {/* <NavStack /> */}
+                  {/* <Footer /> */}
+                  <div className="message-box">
+                    {messages?.map((message, i) => (
+                      <Message
+                        key={i}
+                        content={message.content}
+                        type={message.type}
+                      />
+                    ))}
+                  </div>
+                </div>
+                {/* <ConfPop
                   title=""
                   conformFun={null}
                   onOf={onOfPop}

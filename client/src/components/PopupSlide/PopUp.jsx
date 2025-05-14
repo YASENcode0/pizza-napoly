@@ -5,6 +5,7 @@ import { AddOrder, UseTranslate } from "../PublicStore";
 import { words } from "../PublicStore";
 import { OrderDetails, language } from "../context/OrderDetails";
 import { useNavigate } from "react-router-dom";
+import Order from "../Order";
 
 export default function PopUp({ onOf, setOnOf, currPizza }) {
   // state
@@ -20,17 +21,26 @@ export default function PopUp({ onOf, setOnOf, currPizza }) {
     setOnOf(!onOf);
   }
   function handleOrder() {
-    const myOrder = {
-      note: data?.note,
-      corn: data?.corn,
-      tuna: data?.tuna,
-      mushroom: data?.mushroom,
-      tomato: data?.tomato === undefined ? false : true,
-      onion: data?.onion === undefined ? false : true,
-      olive: data?.olive,
-      pizzaType: currPizza?.name,
-      price: currPizza?.price,
-    };
+    // const myOrder = {
+    //   note: data?.note,
+    //   corn: data?.corn,
+    //   tuna: data?.tuna,
+    //   mushroom: data?.mushroom,
+    //   tomato: data?.tomato === undefined ? false : true,
+    //   onion: data?.onion === undefined ? false : true,
+    //   olive: data?.olive,
+    //   pizzaType: currPizza?.name,
+    //   price: currPizza?.price,
+    // };
+
+    const myOrder = new Order(currPizza?.name,{
+      corn:data?.corn,
+      tuna:data?.tuna,
+      mushroom:data?.mushroom,
+      tomato:data?.tomato,
+      onion:data?.onion,
+      olive:data?.olive,
+    } , data?.note , currPizza?.price)
 
     AddOrder(myOrder).then((ret) => {
       if (ret.status) {
@@ -40,6 +50,10 @@ export default function PopUp({ onOf, setOnOf, currPizza }) {
         console.log("err add order!");
       }
     });
+    addOrder(myOrder)
+
+  // console.log(myOrder)
+
   }
 
   //var

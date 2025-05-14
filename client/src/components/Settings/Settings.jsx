@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { APIProvider } from "@vis.gl/react-google-maps";
 import "./Settings.css";
@@ -8,6 +8,9 @@ import { LuPencil } from "react-icons/lu";
 import { IoIosArrowBack } from "react-icons/io";
 import { MdDarkMode } from "react-icons/md";
 import { FaPencilAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { GetUserData } from "../PublicStore";
+import { MessageContext } from "../context/MessageContext";
 
 export default function Settings() {
    //   const myHeaders = new Headers();
@@ -40,93 +43,133 @@ export default function Settings() {
    //     .then((result) => console.log(result))
    //     .catch((error) => console.error(error));
 
-   const [phoneNumber, setPhoneNumber] = useState("");
-   const [location, setLocation] = useState("ber sheva");
-   const [language, setLanguage] = useState("EN");
+  const { addMessage } = useContext(MessageContext);
 
-   console.log(navigator.geolocation.getCurrentPosition(abc));
-   function abc(a) {
-      console.log(a);
-   }
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [location, setLocation] = useState("ber sheva");
+  const [language, setLanguage] = useState("EN");
+  const [userData, setUserDate] = useState("");
 
-   return (
-      // <div className="settings">
-      //   <div className="settings-box1">
-      //     <img
-      //       src="https://randomuser.me/api/portraits/men/21.jpg"
-      //       alt="profile"
-      //     />
-      //     <div className="settings-inputs">
-      //       <div className="phone-input">
-      //         <input type="number" name="phone" value={123456} disabled />
-      //         <LuPencil />
-      //       </div>
-      //       <div className="location-input">
-      //         <input type="text" name="location" value={location} disabled />
-      //         <LuPencil />
-      //       </div>
-      //     </div>
-      //   </div>
-      //   <div className="settings-box2">
-      //     <select
-      //       name="language"
-      //       onChange={(e) => {
-      //         setLanguage(e.target.value);
-      //       }}
-      //       value={language}
-      //     >
-      //       <option value="AR">arabic</option>
-      //       <option value="EN">english</option>
-      //       <option value="HR">hebrew</option>
-      //     </select>
-      //     <div>light</div>
-      //     <Maps/>
-      //   </div>
-      // </div>
-      <div className="settings">
-         <div className="settings-stack">
-            <button>
-               <IoIosArrowBack />
-            </button>
-            <h2>Settings</h2>
-            <button>
-               <MdDarkMode />
-            </button>
-         </div>
-         <div className="settings-my-photo">
-            <img
-               src={"https://randomuser.me/api/portraits/men/21.jpg"}
-               alt="profilePhoto"
-            />
-            <button>
-               <FaPencilAlt />
-            </button>
-         </div>
-         <div className="settings-inputs">
-            <div className="settings-input">
-               <label>Name</label>
-               <input type="text" placeholder="Yasin" />
-            </div>
-            <div className="settings-input">
-               <label>Email</label>
-               <input type="text" placeholder="Yasin" />
-            </div>
-            <div className="settings-input">
-               <label>Password</label>
-               <input type="text" placeholder="Yasin" />
-            </div>
+  useEffect(() => {
+    getUserData();
+  }, []);
 
-            <div className="settings-input">
-               <label>Phone</label>
-               <input type="text" placeholder="Yasin" />
-            </div>
-            <div className="settings-input">
-               <label>Location</label>
-               <input type="text" placeholder="Yasin" />
-            </div>
-         </div>
-         <button className="settings-log-out">sign out</button>
-         {/* <Maps lat={31.2618034} lng={34.7842539}/> */}
+  async function getUserData() {
+    try {
+      const data = await GetUserData();
+      console.log(data);
+      if (data.status > 299 && data.status < 499) {
+        addMessage(`err get user ${data?.status}`, 1);
+      } else {
+        setUserDate(data.data);
+      }
+    } catch (err) {
+      addMessage(err.message, 1);
+    }
+  }
+
+  const navigate = useNavigate();
+
+  // console.log(navigator.geolocation.getCurrentPosition(abc));
+  function abc(a) {
+    // console.log(a);
+  }
+
+  return (
+    // <div className="settings">
+    //   <div className="settings-box1">
+    //     <img
+    //       src="https://randomuser.me/api/portraits/men/21.jpg"
+    //       alt="profile"
+    //     />
+    //     <div className="settings-inputs">
+    //       <div className="phone-input">
+    //         <input type="number" name="phone" value={123456} disabled />
+    //         <LuPencil />
+    //       </div>
+    //       <div className="location-input">
+    //         <input type="text" name="location" value={location} disabled />
+    //         <LuPencil />
+    //       </div>
+    //     </div>
+    //   </div>
+    //   <div className="settings-box2">
+    //     <select
+    //       name="language"
+    //       onChange={(e) => {
+    //         setLanguage(e.target.value);
+    //       }}
+    //       value={language}
+    //     >
+    //       <option value="AR">arabic</option>
+    //       <option value="EN">english</option>
+    //       <option value="HR">hebrew</option>
+    //     </select>
+    //     <div>light</div>
+    //     <Maps/>
+    //   </div>
+    // </div>
+    <div className="settings">
+      <div className="settings-stack">
+        <button
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          <IoIosArrowBack />
+        </button>
+        <h2>Settings</h2>
+        <button>
+          <MdDarkMode />
+        </button>
       </div>
-   );
+      <div className="settings-my-photo">
+        <img
+          src={"https://randomuser.me/api/portraits/men/21.jpg"}
+          alt="profilePhoto"
+        />
+        <button>
+          <FaPencilAlt />
+        </button>
+      </div>
+      <div className="settings-inputs">
+        <div className="settings-input">
+          <label>Name</label>
+          <div className="settings-input-edt">
+            <input type="text" placeholder={userData?.name} />
+            <button>
+              <FaPencilAlt />
+            </button>
+          </div>
+        </div>
+        <div className="settings-input">
+          <label>Email</label>
+          <input type="text" placeholder={userData?.Email} />
+        </div>
+        <div className="settings-input">
+          <label>Password</label>
+          <input type="text" placeholder={userData?.password} />
+        </div>
+        <div className="settings-input">
+          <label>Phone</label>
+          <div className="settings-input-edt">
+            <input type="text" placeholder={userData?.phone} />
+            <button>
+              <FaPencilAlt />
+            </button>
+          </div>
+        </div>
+        <div className="settings-input">
+          <label>Location</label>
+          <div className="settings-input-edt">
+            <input type="text" placeholder={userData?.location} />
+            <button>
+              <FaPencilAlt />
+            </button>
+          </div>
+        </div>
+      </div>
+      <button className="settings-log-out">sign out</button>
+    </div>
+  );
 }

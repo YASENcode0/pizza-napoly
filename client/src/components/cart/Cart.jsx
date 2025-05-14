@@ -1,20 +1,29 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Cart.css";
-import { GetOrders, GetUserDetails } from "../PublicStore";
+import { GetOrders, GetUserData } from "../PublicStore";
 import { MyOrdersList } from "../context/MyOrdersList";
 import { CgExtensionAdd } from "react-icons/cg";
 import axios from "axios";
 import pizzaImg from "../../assets/photos/pizza-type1.png";
 import { useNavigate } from "react-router-dom";
 
+import { OrderDetails } from "../context/OrderDetails";
+
 export default function Cart() {
-  const [on, setOn] = useState(true);
+  const [on, setOn] = useState(false);
   const [selectAll, setSelectAll] = useState(false);
   const [selected, setSelected] = useState([]);
   const [myOrders, setMyOrders] = useState([]);
+  const [total, setTotal] = useState(0);
+
   const navigate = useNavigate();
 
+  const { allOrders } = useContext(OrderDetails);
+  console.log(allOrders);
+
   useEffect(() => {
+    setTotal(() => allOrders.reduce((total, card) => total + card?.price, 0));
+
     GetOrders().then((ret) => {
       setMyOrders(ret);
     });
@@ -24,6 +33,8 @@ export default function Cart() {
   function selectSwitch() {
     setOn(!on);
   }
+
+  console.log(selected);
 
   function addSelectItem(item) {
     setSelected((pre) => {
@@ -37,8 +48,17 @@ export default function Cart() {
     });
   }
 
-  const userOrders = myOrders?.map((item, i) => {
-    return <ItemLabel key={i} is={selectAll}  item={item} on={on} addItemFun={addSelectItem} />;
+  const userOrders = allOrders?.map((item, i) => {
+    return (
+      <ItemLabel
+        index={i}
+        key={i}
+        is={selectAll}
+        item={item}
+        on={on}
+        addItemFun={addSelectItem}
+      />
+    );
   });
 
   return (
@@ -47,16 +67,21 @@ export default function Cart() {
       <div>
         <button onClick={selectSwitch}>select</button>
         <label>select all</label>
-        <input type="radio" checked={selectAll} onClick={()=>{setSelectAll(!selectAll)
-        console.log(selectAll)
-          setSelected(!selectAll ? myOrders : [])
-        }}/>
+        <input
+          type="radio"
+          checked={selectAll}
+          onClick={() => {
+            setSelectAll(!selectAll);
+            console.log(selectAll);
+            setSelected(!selectAll ? myOrders : []);
+          }}
+        />
       </div>
       <div className="cart-orders">{userOrders}</div>
       <div className="cart-button">
         <div className="cart-bottom">
           <h2>total</h2>
-          <h1>50</h1>
+          <h1>{total}</h1>
         </div>
         <button
           onClick={() => {
@@ -98,7 +123,7 @@ async function chickOutOrder(_id) {
 }
 
 //order component
-function ItemLabel({ item, on, addItemFun, key , is}) {
+function ItemLabel({ index, item, on, addItemFun, key, is }) {
   const [chick, setChick] = useState(false);
 
   function changeChick() {
@@ -116,9 +141,10 @@ function ItemLabel({ item, on, addItemFun, key , is}) {
       <div className="label-logo">
         <img src={pizzaImg} alt="pizza" />
       </div>
-      <p className="label-title">Lorem ipsum dolor sit, amet dolor sit, amet</p>
+      <p className="label-title">{item?.type}</p>
+      <p className="label-title">{item?.note || ""}</p>
       <div className="label-price">
-        <h2>12.0</h2>
+        <h2>{item?.price} ₪</h2>
       </div>
       {on && <input type="radio" onClick={changeChick} checked={is || chick} />}
     </div>

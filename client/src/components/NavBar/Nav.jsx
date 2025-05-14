@@ -4,13 +4,18 @@ import { useNavigate } from "react-router-dom";
 import { RiMenu2Line } from "react-icons/ri";
 import { TbShoppingBag } from "react-icons/tb";
 
-export default function Nav({ handleMenuPop }) {
+export default function Nav({ handleMenuPop , myOrders}) {
   // const [menu, setMenu] = useState(false);
   const [select, setSelect] = useState(0);
   const navigate = useNavigate();
 
   const pathName = window.location.pathname;
   const navPathNames = ["/my-orders", "/"];
+
+  const [cartItemCount,setCartItemCount] = useState(0)
+  useEffect(()=>{
+    setCartItemCount(myOrders.length)
+  },[])
 
   useEffect(() => {
     console.log(pathName);
@@ -53,7 +58,7 @@ export default function Nav({ handleMenuPop }) {
           }}
         >
           <TbShoppingBag />
-          <div className="nav-cart-notification">9</div>
+          <div className="nav-cart-notification">{cartItemCount}</div>
         </button>
       </div>
       {
